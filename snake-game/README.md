@@ -26,7 +26,7 @@ This project uses modern TypeScript features, including classes and private clas
 
 ## License
 
-This project is licensed under the terms of the [MIT license](LICENSE).
+This project is licensed under the terms described in the included `LICENSE` file. See `LICENSE` for details.
 
 ## Contributing
 
