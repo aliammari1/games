@@ -1,0 +1,25 @@
+{
+  "name": "tic-tac-toe-game",
+  "version": "2.0.0",
+  "description": "Responsive Tic-Tac-Toe game with TypeScript and Next.js",
+  "homepage": "https://github.com/aliammari1/Tic-Tac-Toe-Game",
+  "license": "Custom Commercial Use License",
+  "author": "Ali Ammari",
+  "dependencies": {
+    "next": "^16.0.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
+}
