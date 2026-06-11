@@ -45,10 +45,7 @@ export default class Board {
     return element;
   }
 
-  public setPosition(
-    element: HTMLElement,
-    position: { x: number; y: number }
-  ): void {
+  public setPosition(element: HTMLElement, position: { x: number; y: number }): void {
     element.style.gridColumn = position.x.toString();
     element.style.gridRow = position.y.toString();
   }
@@ -90,20 +87,12 @@ export default class Board {
 
   private checkSnakeCollision(): void {
     const head: { x: number; y: number } = this.snake.snakeHead[0];
-    if (
-      head.x < 1 ||
-      head.x > this._gridSize ||
-      head.y < 1 ||
-      head.y > this._gridSize
-    ) {
+    if (head.x < 1 || head.x > this._gridSize || head.y < 1 || head.y > this._gridSize) {
       this.resetGame();
     }
 
     for (let i = 1; i < this.snake.snakeHead.length; i++) {
-      if (
-        head.x === this.snake.snakeHead[i].x &&
-        head.y === this.snake.snakeHead[i].y
-      )
+      if (head.x === this.snake.snakeHead[i].x && head.y === this.snake.snakeHead[i].y)
         this.resetGame();
     }
   }

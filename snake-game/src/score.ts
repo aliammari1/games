@@ -3,7 +3,7 @@ export default class Score {
   private _highScore: number;
   private _score: HTMLElement | null;
   private _highScoreText: HTMLElement | null;
-  public constructor(snakeLength: number = 1) {
+  public constructor(snakeLength = 1) {
     this._currentScore = snakeLength - 1;
     this._highScore = 0;
     this._score = document.getElementById("score");
@@ -21,9 +21,7 @@ export default class Score {
     if (this._highScoreText !== null) {
       if (this._currentScore > this._highScore) {
         this._highScore = this._currentScore;
-        this._highScoreText.textContent = this._highScore
-          .toString()
-          .padStart(3, "0");
+        this._highScoreText.textContent = this._highScore.toString().padStart(3, "0");
       }
       this._highScoreText.style.display = "block";
     }

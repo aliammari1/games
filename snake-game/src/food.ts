@@ -1,4 +1,4 @@
-import Board from "./board";
+import type Board from "./board";
 
 export default class Food {
   private _x: number;

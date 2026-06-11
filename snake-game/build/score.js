@@ -15,9 +15,7 @@ export default class Score {
         if (this._highScoreText !== null) {
             if (this._currentScore > this._highScore) {
                 this._highScore = this._currentScore;
-                this._highScoreText.textContent = this._highScore
-                    .toString()
-                    .padStart(3, "0");
+                this._highScoreText.textContent = this._highScore.toString().padStart(3, "0");
             }
             this._highScoreText.style.display = "block";
         }

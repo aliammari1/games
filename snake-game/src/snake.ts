@@ -1,4 +1,5 @@
-import Board from "./board";
+import type Board from "./board";
+import { type Direction, nextHead } from "./logic.js";
 
 export default class Snake {
   private _initPosX: number;
@@ -30,28 +31,14 @@ export default class Snake {
   }
 
   public drawSnake(board: Board, gameBoard: HTMLElement) {
-    this._snakeHead.forEach((segment) => {
+    for (const segment of this._snakeHead) {
       const snakeElement: HTMLElement = board.createGameElement("div", "snake");
       board.setPosition(snakeElement, segment);
       gameBoard.appendChild(snakeElement);
-    });
+    }
   }
   public move() {
-    const head: { x: number; y: number } = { ...this._snakeHead[0] };
-    switch (this.direction) {
-      case "right":
-        head.x++;
-        break;
-      case "left":
-        head.x--;
-        break;
-      case "up":
-        head.y--;
-        break;
-      case "down":
-        head.y++;
-        break;
-    }
+    const head = nextHead(this._snakeHead[0], this._direction as Direction);
     this._snakeHead.unshift(head);
   }
 }
