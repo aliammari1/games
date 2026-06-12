@@ -12,7 +12,8 @@
 
     /* Language and Environment */
     "target": "es2017" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    "lib": ["dom", "dom.iterable", "es2017"] /* Browser canvas/DOM game — no Node runtime. */,
+    "types": [] /* Do not pull @types/node browser-incompatible globals into the build. */,
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
     // "emitDecoratorMetadata": true,                    /* Emit design-type metadata for decorated declarations in source files. */
@@ -105,5 +106,7 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "build", "tests", "vitest.config.ts"]
 }

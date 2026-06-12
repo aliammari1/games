@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Combined Cloudflare Pages output (assembled by scripts/assemble-dist.mjs)
+dist/
+
+# Test / coverage output
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# OS / editor
+.DS_Store
+*.log
+.idea/
+*.iml
+
+# Local env
+.env
+.env*.local
+
+# Internal growth/marketing notes (not for public)
+GROWTH.md
+BANNER.md
+SUBMITTING_TO_AWESOME.md
+launch-kit.md
+star-strategy.md
+modernization-backlog.md

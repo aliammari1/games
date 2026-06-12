@@ -1,0 +1,37 @@
+name: CodeQL
+
+# Static security analysis for the JS/TS code in both games (snake + Tic-Tac-Toe).
+# Equivalent to GitHub's "default setup" but committed as code so it's pinned,
+# reviewable, and runs identically on forks. Results show up under Security ->
+# Code scanning alerts.
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "27 4 * * 1" # weekly, Monday 04:27 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (javascript-typescript)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@b0c4fd77f6c559021d78430ec4d0d169ae74a4eb # v3
+        with:
+          languages: javascript-typescript
+          queries: security-and-quality
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@b0c4fd77f6c559021d78430ec4d0d169ae74a4eb # v3
+        with:
+          category: "/language:javascript-typescript"
