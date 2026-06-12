@@ -1,14 +1,28 @@
 <!-- Banner: generate from BANNER.md, then this renders. -->
 ![Games — arcade-neon banner](assets/banner.png)
 
-# 🎮 Games
+<h1 align="center">🎮 Games — play in your browser</h1>
+
+<p align="center">
+  <a href="https://games.pages.dev/snake/"><img alt="Play Snake" src="https://img.shields.io/badge/▶%20Play%20Snake-39ff14?style=for-the-badge&logo=gamejolt&logoColor=050014&labelColor=050014"></a>
+  &nbsp;
+  <a href="https://games.pages.dev/ttt/"><img alt="Play vs Unbeatable AI" src="https://img.shields.io/badge/▶%20Play%20vs%20Unbeatable%20AI-ff2bd6?style=for-the-badge&logo=react&logoColor=ffffff&labelColor=050014"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/aliammari1/games/stargazers"><img alt="Star this repo" src="https://img.shields.io/github/stars/aliammari1/games?style=for-the-badge&logo=github&label=%E2%AD%90%20Star&color=f5b700&labelColor=050014"></a>
+</p>
+
+<p align="center"><em>You cannot beat the Tic-Tac-Toe AI. It draws at worst — here it is refusing to lose:</em></p>
+
+<p align="center"><img src="assets/ttt-demo.gif" alt="Tic-Tac-Toe minimax AI never losing" width="440"></p>
 
 Two small, polished browser games in one Bun monorepo:
 
 - **🐍 Snake** — a classic, written from scratch in TypeScript on the HTML5 canvas, organized as small testable modules.
-- **⭕ Tic-Tac-Toe** — a Next.js + React board with an **unbeatable minimax AI** (alpha-beta pruned) you can actually play against.
+- **⭕ Tic-Tac-Toe** — a Next.js + React board with an **unbeatable minimax AI** (alpha-beta pruned) you can actually play against. The engine ships separately soon as the **[`unbeatable-tictactoe`](#-the-unbeatable-tic-tac-toe-ai) npm package** (Wave 2).
 
-No installs to play. Both ship as static sites to **one Cloudflare Pages project**.
+No installs to play. Both ship as static sites to **one Cloudflare Pages project**. **If the unbeatable AI made you smile, [⭐ star the repo](https://github.com/aliammari1/games) — it's the only way to win.**
 
 <p>
   <a href="https://github.com/aliammari1/games/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg"></a>
@@ -56,7 +70,20 @@ export function bestMove(board: Board, aiPlayer: Player): number; // optimal mov
 export function chooseMove(board, aiPlayer, "easy" | "hard"): number; // difficulty dispatcher
 ```
 
-A short write-up — *"an unbeatable Tic-Tac-Toe AI in ~180 lines of TypeScript"* — walks through the minimax + alpha-beta reasoning and the "prefer faster wins" depth trick.
+### How the minimax + alpha-beta pruning works (tic tac toe minimax in JavaScript/TypeScript)
+
+If you searched for **"tic tac toe minimax javascript"**, this is the short version — the full, commented implementation is [`lib/ai.ts`](Tic-Tac-Toe-Game/lib/ai.ts):
+
+1. **Minimax** treats the game as a tree. The AI (the *maximizer*) tries to push the score up; it assumes the opponent (the *minimizer*) always replies with their best move. At each terminal board it scores the result from the AI's perspective: win `+`, loss `-`, draw `0`. Each non-terminal node takes the max (AI to move) or min (opponent to move) of its children. Because Tic-Tac-Toe's game tree is tiny (≤ 9! ≈ 362,880 leaves, far fewer after pruning), the AI can search it **completely** — so it is *provably optimal*, never worse than a draw.
+2. **Depth-aware scoring.** The score is `10 - depth` for a win and `depth - 10` for a loss, so a win in 3 plies beats a win in 5, and a forced loss is delayed as long as possible. The AI plays the *fastest win and slowest loss* — it punishes your mistakes instead of just avoiding defeat.
+3. **Alpha-beta pruning** carries two bounds down the tree: **α** (best the maximizer can already guarantee) and **β** (best the minimizer can guarantee). When `β ≤ α`, the remaining sibling moves cannot change the outcome, so the branch is cut. Same answer, a fraction of the nodes.
+
+```ts
+export function bestMove(board: Board, aiPlayer: Player): number;            // optimal move, never loses
+export function chooseMove(board, aiPlayer, "easy" | "hard"): number;        // difficulty dispatcher
+```
+
+The whole engine is **zero-dependency TypeScript**, exhaustively unit-tested, and will be published as the **`unbeatable-tictactoe` npm package** so you can `npm i` the brain without the UI.
 
 ---
 
@@ -180,6 +207,15 @@ be automated in CI with the community `manleydev/butler-publish-itchio-action`.
 
 PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 Good first issues: Snake touch controls, high-score persistence, a Claude-powered "move coach" for Tic-Tac-Toe.
+
+## 🔗 Related projects
+
+Part of a wider set of open-source projects — if you like this one, these are worth a look:
+
+- 🎮 **[Gold-Rush](https://github.com/aliammari1/Gold-Rush)** — a 2D platformer in **pure C/SDL** that plays in your browser (WASM).
+- 📊 **[github-traffic-analytics](https://github.com/aliammari1/github-traffic-analytics)** — keep your repo traffic past GitHub's 14-day window.
+- 🤖 **[awesome-ai-tools](https://github.com/aliammari1/awesome-ai-tools)** — a curated, regularly-updated index of AI tools.
+- 👤 **[All projects →](https://github.com/aliammari1)**
 
 ## 📄 License
 

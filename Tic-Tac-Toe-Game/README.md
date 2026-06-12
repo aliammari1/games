@@ -107,6 +107,11 @@ Static export → **Cloudflare Pages** under `/ttt` (built with
 Pages project; see the [root README](../README.md#-deployment). Also publishable
 to **itch.io** as an HTML5 game via butler.
 
+## 🔗 Related
+
+- 🐍 **[Snake](../snake-game/)** — the other game in this monorepo.
+- 🎮 **[All games + the minimax write-up →](../README.md)** · 📊 **[github-traffic-analytics](https://github.com/aliammari1/github-traffic-analytics)** · 🤖 **[awesome-ai-tools](https://github.com/aliammari1/awesome-ai-tools)**
+
 ## 📄 License
 
 [MIT](LICENSE) © Ali Ammari

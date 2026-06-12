@@ -73,6 +73,11 @@ The `build/` directory is plain static files → ships to **Cloudflare Pages**
 under `/snake` (see the [root README](../README.md#-deployment)), and is also
 publishable to **itch.io** as an HTML5 game via butler.
 
+## 🔗 Related
+
+- ⭕ **[Tic-Tac-Toe vs unbeatable AI](../Tic-Tac-Toe-Game/)** — the other game in this monorepo.
+- 🎮 **[All games →](../README.md)** · 🎮 **[Gold-Rush (C/SDL platformer in WASM)](https://github.com/aliammari1/Gold-Rush)**
+
 ## 📄 License
 
 [MIT](LICENSE) © Ali Ammari
