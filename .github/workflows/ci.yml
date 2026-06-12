@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  snake:
+    name: Snake (build + test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: snake-game
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run build
+      - run: bun run test
+
+  tic-tac-toe:
+    name: Tic-Tac-Toe (build + test + minimax)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Tic-Tac-Toe-Game
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run typecheck
+      - run: bun run test
+      - run: bun run build

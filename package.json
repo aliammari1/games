@@ -1,0 +1,20 @@
+{
+  "name": "games",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Browser games monorepo: a TypeScript Snake and a Next.js Tic-Tac-Toe with an unbeatable minimax AI. Ships to one Cloudflare Pages project.",
+  "homepage": "https://github.com/aliammari1/games",
+  "license": "MIT",
+  "author": "Ali Ammari",
+  "scripts": {
+    "build:snake": "cd snake-game && bun install && bun run build",
+    "build:ttt": "cd Tic-Tac-Toe-Game && bun install && NEXT_PUBLIC_BASE_PATH=/ttt bun run build",
+    "build": "bun run build:snake && bun run build:ttt && bun run assemble",
+    "assemble": "bun run scripts/assemble-dist.mjs",
+    "test": "cd snake-game && bun run test && cd ../Tic-Tac-Toe-Game && bun run test",
+    "lint": "biome check ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  }
+}

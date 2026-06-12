@@ -1,0 +1,12 @@
+# Cloudflare Pages project for the games monorepo.
+#
+# Both games are static and ship to ONE Pages project under two paths:
+#   /snake -> snake-game/build  (tsc output, plain canvas/DOM)
+#   /ttt   -> Tic-Tac-Toe-Game/out (Next.js `output: "export"`, basePath=/ttt)
+#
+# The combined `dist/` directory is assembled by `bun run build` at the repo
+# root (see package.json) and deployed via cloudflare/wrangler-action in
+# .github/workflows/deploy.yml. No Vercel, no GitHub Pages.
+name = "games"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "dist"

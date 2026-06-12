@@ -1,0 +1,36 @@
+name: Deploy to Cloudflare Pages
+
+# Builds both games into a single dist/ (/snake + /ttt) and deploys to one
+# Cloudflare Pages project. Gated on repository secrets — until those are set
+# the job is skipped, so this never fails a fork.
+#
+# Required secrets:
+#   CLOUDFLARE_API_TOKEN  - Pages:Edit scoped token
+#   CLOUDFLARE_ACCOUNT_ID - your account id
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'aliammari1' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Build combined dist/
+        run: bun run build
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=games
