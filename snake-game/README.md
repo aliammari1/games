@@ -1,33 +1,78 @@
-# Classic Snake Game
+# 🐍 Classic Snake
 
-This project is a modern implementation of the classic Snake Game using TypeScript. The game includes features such as a game board, a snake, food for the snake, and a scoring system. The game is built with object-oriented programming principles in mind, making the code modular and easy to maintain.
+A from-scratch **Snake** game in **TypeScript** on the HTML5 canvas/DOM,
+organized as small, testable, object-oriented modules. No frameworks, no build
+step required to play — just open the compiled `build/index.html`.
 
-## Project Structure
+🎯 **[▶ Play Now](https://games.pages.dev/snake/)** &nbsp;·&nbsp; ⌨️ Keyboard controls &nbsp;·&nbsp; 🧩 Modular TS &nbsp;·&nbsp; 🧪 Vitest
 
-- `src/board.ts`: This file contains the `Board` class which handles the game board, game state, and game logic. It includes methods for starting and stopping the game, handling key presses, checking for collisions, and drawing the game elements on the board.
-- `src/food.ts`: This file contains the `Food` class which handles the creation and placement of food on the game board.
-- `src/game.ts`: This file contains the main game logic, including the game loop and event listeners.
-- `src/snake.ts`: This file contains the `Snake` class which handles the snake's behavior, including movement and growth.
-- `src/score.ts`: This file contains the `Score` class which handles the game score, including updating and displaying the score.
-- `src/style.css`: This file contains all the styles for the game.
-- `src/index.html`: This is the main HTML file that displays the game.
+<p>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white">
+  <img alt="Bun" src="https://img.shields.io/badge/runtime-Bun-black?logo=bun">
+  <img alt="Vitest" src="https://img.shields.io/badge/tested%20with-Vitest-6E9F18?logo=vitest&logoColor=white">
+  <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg">
+</p>
 
-## How to Play
+<p align="center"><img src="../assets/snake-demo.gif" alt="Snake gameplay" width="420"></p>
 
-1. Open `index.html` in your browser.
-2. Press the spacebar to start the game.
-3. Use the arrow keys to control the direction of the snake.
-4. The game ends when the snake hits the game board edge or its own body.
-5. The score is updated based on the length of the snake.
+---
 
-## Development
+## 🎮 How to play
 
-This project uses modern TypeScript features, including classes and private class fields. It is organized into modules for better code organization and maintainability.
+1. Open `build/index.html` (or run `bun run start`).
+2. Press **Spacebar** to start.
+3. Steer with the **Arrow keys** (↑ ↓ ← →).
+4. Eat the food to grow and score; don't hit a wall or yourself.
 
-## License
+## 🧩 Architecture
 
-This project is licensed under the terms described in the included `LICENSE` file. See `LICENSE` for details.
+Each concern is its own class/module under `src/` — easy to read, easy to test:
 
-## Contributing
+| File | Responsibility |
+| --- | --- |
+| `board.ts` | Game board, state, loop, rendering, key handling, collisions |
+| `snake.ts` | Snake movement and growth |
+| `food.ts` | Food spawning + placement |
+| `score.ts` | Score tracking and display |
+| `logic.ts` | Pure, side-effect-free helpers (the Vitest target) |
+| `game.ts` | Bootstrap + event wiring |
 
-Contributions are welcome! Please read the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
+The pure logic lives in `logic.ts` precisely so it can be unit-tested without a
+DOM — the canvas/DOM classes stay thin around it.
+
+## 🚀 Develop
+
+Prereq: [**Bun**](https://bun.sh).
+
+```bash
+cd snake-game
+bun install
+bun run build      # compile src/ -> build/ (tsc)
+bun run dev        # tsc --watch
+bun run start      # serve build/ locally
+```
+
+### Scripts
+
+```bash
+bun run build          # tsc
+bun run lint           # Biome
+bun run test           # Vitest
+bun run test:coverage  # coverage
+bun run test:e2e       # Playwright
+```
+
+## 🧪 Tests
+
+[`tests/logic.test.ts`](tests/logic.test.ts) covers the pure game logic
+(collision detection, growth, food placement) with **Vitest**.
+
+## ☁️ Deployment
+
+The `build/` directory is plain static files → ships to **Cloudflare Pages**
+under `/snake` (see the [root README](../README.md#-deployment)), and is also
+publishable to **itch.io** as an HTML5 game via butler.
+
+## 📄 License
+
+[MIT](LICENSE) © Ali Ammari

@@ -1,4 +1,3 @@
-```markdown
 # Contributing to Classic Snake Game
 
 Thanks for your interest in contributing! We welcome improvements, bug fixes, documentation updates, and ideas for features.
@@ -28,4 +27,3 @@ Code of conduct
 By participating you agree to follow the project `CODE_OF_CONDUCT.md`.
 
 Thank you for helping improve this project!
-```
