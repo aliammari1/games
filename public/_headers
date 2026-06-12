@@ -1,0 +1,24 @@
+# Cloudflare Pages headers for the games project.
+# Copied verbatim into dist/ by scripts/assemble-dist.mjs so Pages applies it.
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+#
+# Notes on the CSP:
+#  - Snake is plain canvas/DOM; Tic-Tac-Toe is a Next.js static export.
+#  - Next's static export inlines a small bootstrap script and styled-jsx, and
+#    Tailwind/next-themes set inline styles, so 'unsafe-inline' is required for
+#    style-src and script-src under `output: "export"` (no nonce pipeline).
+#  - Google Fonts (Inter) is loaded via next/font, which self-hosts the CSS/woff2
+#    at build time, so no external font origin is needed.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# Long-cache the hashed Next.js static assets.
+/ttt/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable

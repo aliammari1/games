@@ -18,6 +18,13 @@ export default defineConfig({
       provider: "v8",
       include: ["lib/ai.ts"],
       reporter: ["text", "lcov"],
+      // The minimax engine is exhaustively tested — gate regressions hard.
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
     },
   },
 });

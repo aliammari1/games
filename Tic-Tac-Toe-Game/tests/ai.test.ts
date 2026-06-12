@@ -6,6 +6,7 @@ import {
   bestMove,
   chooseMove,
   isFull,
+  isTerminal,
   minimax,
   otherPlayer,
   randomMove,
@@ -44,6 +45,20 @@ describe("helpers", () => {
   it("otherPlayer flips the player", () => {
     expect(otherPlayer("X")).toBe("O");
     expect(otherPlayer("O")).toBe("X");
+  });
+  it("isTerminal is true on a win, true on a full draw, false mid-game", () => {
+    expect(isTerminal(["X", "X", "X", "", "", "", "", "", ""])).toBe(true); // win
+    expect(isTerminal(["X", "O", "X", "X", "O", "O", "O", "X", "X"])).toBe(true); // full draw
+    expect(isTerminal(empty())).toBe(false); // mid-game
+  });
+});
+
+describe("no-legal-move guards", () => {
+  it("bestMove returns -1 on a full board", () => {
+    expect(bestMove(["X", "O", "X", "X", "O", "O", "O", "X", "X"], "X")).toBe(-1);
+  });
+  it("chooseMove(hard) returns -1 on a full board", () => {
+    expect(chooseMove(["X", "O", "X", "X", "O", "O", "O", "X", "X"], "X", "hard")).toBe(-1);
   });
 });
 

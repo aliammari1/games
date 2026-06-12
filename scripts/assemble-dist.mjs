@@ -2,6 +2,7 @@
 //
 // Layout produced in dist/:
 //   dist/index.html      -> landing page linking to both games
+//   dist/_headers        -> Cloudflare Pages security headers (from public/_headers)
 //   dist/snake/...       -> snake-game/build (tsc canvas/DOM build)
 //   dist/ttt/...         -> Tic-Tac-Toe-Game/out (Next.js static export, basePath=/ttt)
 //
@@ -17,6 +18,7 @@ const dist = resolve(root, "dist");
 
 const snakeBuild = resolve(root, "snake-game", "build");
 const tttOut = resolve(root, "Tic-Tac-Toe-Game", "out");
+const headersFile = resolve(root, "public", "_headers");
 
 async function main() {
   await rm(dist, { recursive: true, force: true });
@@ -33,6 +35,14 @@ async function main() {
   await cp(tttOut, resolve(dist, "ttt"), { recursive: true });
 
   await writeFile(resolve(dist, "index.html"), landingPage(), "utf8");
+
+  // Ship Cloudflare Pages security headers (CSP/HSTS/etc.) at the dist root.
+  if (existsSync(headersFile)) {
+    await cp(headersFile, resolve(dist, "_headers"));
+    console.log("Copied public/_headers -> dist/_headers");
+  } else {
+    console.warn(`Warning: ${headersFile} missing — deploying without _headers`);
+  }
 
   console.log("Assembled dist/ -> /snake and /ttt");
 }

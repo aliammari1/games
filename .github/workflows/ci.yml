@@ -17,14 +17,14 @@ jobs:
       run:
         working-directory: snake-game
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run lint
       - run: bun run build
-      - run: bun run test
+      - run: bun run test:coverage # enforces the coverage thresholds in vitest.config.ts
 
   tic-tac-toe:
     name: Tic-Tac-Toe (build + test + minimax)
@@ -33,12 +33,12 @@ jobs:
       run:
         working-directory: Tic-Tac-Toe-Game
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run lint
       - run: bun run typecheck
-      - run: bun run test
+      - run: bun run test:coverage # enforces the coverage thresholds in vitest.config.ts
       - run: bun run build
