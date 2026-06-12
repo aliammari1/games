@@ -22,6 +22,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.49.1",
+    "@stryker-mutator/core": "^9.0.0",
+    "@stryker-mutator/vitest-runner": "^9.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@types/node": "^24.10.1",
@@ -47,6 +49,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:mutation": "stryker run",
     "test:e2e": "playwright test"
   }
 }

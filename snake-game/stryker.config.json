@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "Mutation testing for the pure Snake game logic. Stryker mutates src/logic.ts and reruns the Vitest suite; a high mutation score proves the tests actually assert behaviour, not just execute lines.",
+  "packageManager": "npm",
+  "testRunner": "vitest",
+  "reporters": ["html", "clear-text", "progress"],
+  "coverageAnalysis": "perTest",
+  "mutate": ["src/logic.ts"],
+  "thresholds": {
+    "high": 90,
+    "low": 80,
+    "break": 80
+  }
+}

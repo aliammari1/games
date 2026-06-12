@@ -58,12 +58,27 @@ describe("hitsSelf", () => {
     ];
     expect(hitsSelf(body[0], body)).toBe(false);
   });
+  it("requires BOTH coordinates to match (same x, different y)", () => {
+    const body: Point[] = [
+      { x: 3, y: 3 },
+      { x: 3, y: 4 }, // shares x, not y
+    ];
+    expect(hitsSelf(body[0], body)).toBe(false);
+  });
+  it("requires BOTH coordinates to match (same y, different x)", () => {
+    const body: Point[] = [
+      { x: 3, y: 3 },
+      { x: 4, y: 3 }, // shares y, not x
+    ];
+    expect(hitsSelf(body[0], body)).toBe(false);
+  });
 });
 
 describe("eats", () => {
   it("detects food collision", () => {
     expect(eats({ x: 4, y: 7 }, { x: 4, y: 7 })).toBe(true);
-    expect(eats({ x: 4, y: 7 }, { x: 4, y: 8 })).toBe(false);
+    expect(eats({ x: 4, y: 7 }, { x: 4, y: 8 })).toBe(false); // same x, different y
+    expect(eats({ x: 4, y: 7 }, { x: 5, y: 7 })).toBe(false); // same y, different x
   });
 });
 
