@@ -19,3 +19,11 @@ test-results/
 # Local env
 .env
 .env*.local
+
+# Internal growth/marketing notes (not for public)
+GROWTH.md
+BANNER.md
+SUBMITTING_TO_AWESOME.md
+launch-kit.md
+star-strategy.md
+modernization-backlog.md
